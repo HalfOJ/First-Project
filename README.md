@@ -1,6 +1,6 @@
 # First-Project
 First Project: Simple To-Do App
-## Feature
+## Features
 - View Tasks
 - Add Tasks
 - Mark Tasks as Done
