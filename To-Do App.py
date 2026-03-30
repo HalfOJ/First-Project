@@ -125,6 +125,7 @@ def sortTask(tasks):
     for task in low:
         rTask.append(task)
     tasks[:] = rTask
+    save(tasks)
 
 def main() :
     tasks = load_tasks()

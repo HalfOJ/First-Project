@@ -5,19 +5,24 @@
         "priority": "High"
     },
     {
-        "title": "Cook",
-        "done": false,
-        "priority": "Low"
-    },
-    {
-        "title": "Take a shit",
-        "done": false,
-        "priority": "Medium"
-    },
-    {
         "title": "Do Homework",
         "done": false,
         "priority": "High"
+    },
+    {
+        "title": "Watch Anime",
+        "done": false,
+        "priority": "High"
+    },
+    {
+        "title": "Take a shit",
+        "done": true,
+        "priority": "Medium"
+    },
+    {
+        "title": "Cook",
+        "done": false,
+        "priority": "Low"
     },
     {
         "title": "Read",
