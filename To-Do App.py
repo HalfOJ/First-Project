@@ -1,6 +1,8 @@
 import json
 import os
 from colorama import init, Fore, Style
+from datetime import datetime
+
 init(autoreset=True)
 
 file_name = "realTaskList.json"
@@ -34,14 +36,52 @@ def viewTask(tasks):
         elif task['priority'] == "Low":
             color = Fore.GREEN
         print(color+f"{index}: [{status}] {task['title']} - {task['priority']}")
+        if (task['Overdue'] == True):
+            print("Due Date: " + task['due_date'] + Fore.RED + " - OVERDUE")
+        else:
+            print("Due Date: " + task['due_date'])
     print()
     print()
 
               
 
+def checkOverDue(task):
+
+    try:
+        overdue = isOverDue(task['due_date'])
+        if overdue & task['done'] == False:
+            return True
+        else:
+            return False
+    except ValueError:
+        print("Invalid Date")
+
+
+def isOverDue(date):
+    try:
+        today = datetime.today().date()
+        task_date = datetime.strptime(date, "%Y-%m-%d").date()
+        if task_date < today:
+            return True
+        else:
+            return False
+    except ValueError:
+        print("Invalid Date")
+
+
 def addTask(tasks):
     title = input("\nEnter task\n").strip()
     print()
+    dueDate = input("\nEnter due date (YYYY-MM-DD) : ").strip()
+    print()
+
+    try:
+        datetime.strptime(dueDate,"%Y-%m-%d")
+    except ValueError:
+        print("\nInvalid Date Format. Use (YYYY-MM-DD)")
+        return
+    
+    overdue = isOverDue(dueDate)
     
     try:
         prioTitle = 0
@@ -63,8 +103,16 @@ def addTask(tasks):
             else:
                 print("\nError: Enter a valid input\n")
 
+
+
         if title:
-            tasks.append({"title": title, "done": False, "priority": priority})
+
+            tasks.append({"title": title, 
+                          "done": False, 
+                          "priority": priority, 
+                          "due_date": dueDate, 
+                          "Overdue": overdue
+                          })
             save(tasks)
             print("\n Successfully added task\n")
         else:
@@ -84,6 +132,8 @@ def markTask(tasks) :
             num = int(input("\nEnter a task to mark as done\n"))
             if (1 <= num <= len(tasks)):
                 tasks[num-1]["done"] = True
+                if tasks[num-1]["Overdue"]:
+                    tasks[num-1]["Overdue"] = False
                 save(tasks)
                 print("\n Task marked done\n")
             else:
