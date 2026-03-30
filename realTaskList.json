@@ -1,18 +1,27 @@
 [
     {
+        "title": "Read books",
+        "done": false,
+        "priority": "High"
+    },
+    {
+        "title": "Cook",
+        "done": false,
+        "priority": "Low"
+    },
+    {
+        "title": "Take a shit",
+        "done": false,
+        "priority": "Medium"
+    },
+    {
         "title": "Do Homework",
-        "done": false
+        "done": false,
+        "priority": "High"
     },
     {
-        "title": "Make Lunch",
-        "done": true
-    },
-    {
-        "title": "Track Diet",
-        "done": false
-    },
-    {
-        "title": "Make Dinner",
-        "done": false
+        "title": "Read",
+        "done": false,
+        "priority": "Low"
     }
 ]

@@ -1,7 +1,10 @@
 import json
 import os
+from colorama import init, Fore, Style
+init(autoreset=True)
 
 file_name = "realTaskList.json"
+
 
 def load_tasks():
 
@@ -24,7 +27,13 @@ def viewTask(tasks):
     print("\nYour To-Do List\n")
     for index, task in enumerate(tasks, start= 1):
         status = "✓" if task["done"] else " "
-        print(f"{index}: [{status}] {task['title']}")
+        if task['priority'] == "High":
+            color = Fore.RED
+        elif task['priority'] == "Medium":
+            color = Fore.YELLOW
+        elif task['priority'] == "Low":
+            color = Fore.GREEN
+        print(color+f"{index}: [{status}] {task['title']}")
     print()
     print()
 
@@ -32,12 +41,38 @@ def viewTask(tasks):
 
 def addTask(tasks):
     title = input("\nEnter task\n").strip()
-    if title:
-        tasks.append({"title": title, "done": False})
-        save(tasks)
-        print("\n Successfully added task\n")
-    else:
-        print("\nTask cannot be empty\n")
+    print()
+    
+    try:
+        prioTitle = 0
+        priority = ""
+        while priority == "":
+            print("What priority?")
+            print("1. High")
+            print("2. Medium")
+            print("3. Low")
+
+            prioTitle = int(input("\nEnter Priority\n"))
+
+            if prioTitle == 1:
+                priority = "High"
+            elif prioTitle == 2:
+                priority = "Medium"
+            elif prioTitle == 3:
+                priority = "Low"
+            else:
+                print("\nError: Enter a valid input\n")
+
+        if title:
+            tasks.append({"title": title, "done": False, "priority": priority})
+            save(tasks)
+            print("\n Successfully added task\n")
+        else:
+            print("\nTask cannot be empty\n")
+        sortTask(tasks)
+    except ValueError:
+        print("\nError: Enter valid input")
+
 
 
 def markTask(tasks) :
@@ -69,6 +104,28 @@ def delTask(tasks):
         except ValueError:
             print("\nInput is invalid\n")
 
+def sortTask(tasks):
+    low = []
+    med = []
+    high = []
+    for task in tasks:
+        prio = task['priority']
+        if prio == "Low":
+            low.append(task)
+        elif prio == "Medium":
+            med.append(task)
+        elif prio == "High":
+            high.append(task)
+    
+    rTask = []
+    for task in high:
+        rTask.append(task)
+    for task in med:
+        rTask.append(task)
+    for task in low:
+        rTask.append(task)
+    tasks[:] = rTask
+
 def main() :
     tasks = load_tasks()
 
@@ -82,7 +139,7 @@ def main() :
             print("4. Delete task")
             print("5. Quit")
             
-            choice = int(input("\n\nEnter choice "))
+            choice = int(input("\nEnter choice\n"))
             if choice == 1:
                 viewTask(tasks)
             elif choice == 2:
