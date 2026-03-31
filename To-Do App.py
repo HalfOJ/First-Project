@@ -102,6 +102,7 @@ def addTask(tasks):
                 priority = "Low"
             else:
                 print("\nError: Enter a valid input\n")
+    
 
 
 
@@ -112,11 +113,11 @@ def addTask(tasks):
                           "priority": priority, 
                           "due_date": dueDate, 
                           })
-            save(tasks)
             print("\n Successfully added task\n")
         else:
             print("\nTask cannot be empty\n")
         sortTask(tasks)
+        save(tasks)
     except ValueError:
         print("\nError: Enter valid input")
 
@@ -218,6 +219,7 @@ def editTask(tasks):
                     print("\nTask Not Edited\n")
                 else:
                     print("\nEnter a valid input")
+            sortTask(tasks)
             save(tasks)
 
                 
