@@ -36,7 +36,7 @@ def viewTask(tasks):
         elif task['priority'] == "Low":
             color = Fore.GREEN
         print(color+f"{index}: [{status}] {task['title']} - {task['priority']}")
-        if (task['Overdue'] == True):
+        if (isOverDue(task['due_date']) == True):
             print("Due Date: " + task['due_date'] + Fore.RED + " - OVERDUE")
         else:
             print("Due Date: " + task['due_date'])
@@ -81,7 +81,7 @@ def addTask(tasks):
         print("\nInvalid Date Format. Use (YYYY-MM-DD)")
         return
     
-    overdue = isOverDue(dueDate)
+
     
     try:
         prioTitle = 0
@@ -111,7 +111,6 @@ def addTask(tasks):
                           "done": False, 
                           "priority": priority, 
                           "due_date": dueDate, 
-                          "Overdue": overdue
                           })
             save(tasks)
             print("\n Successfully added task\n")

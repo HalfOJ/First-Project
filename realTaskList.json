@@ -1,23 +1,14 @@
 [
     {
-        "title": "Read books",
+        "title": "Read",
         "done": false,
         "priority": "High",
-        "due_date": "2026-05-30",
-        "Overdue": false
+        "due_date": "2026-02-12"
     },
     {
-        "title": "Shop for grocery",
-        "done": true,
-        "priority": "Medium",
-        "due_date": "2026-02-15",
-        "Overdue": false
-    },
-    {
-        "title": "Cook and Clean",
-        "done": true,
+        "title": "Homework",
+        "done": false,
         "priority": "Low",
-        "due_date": "2026-02-14",
-        "Overdue": false
+        "due_date": "2026-05-12"
     }
 ]
