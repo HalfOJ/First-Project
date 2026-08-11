@@ -36,7 +36,7 @@ def viewTask(tasks):
         elif task['priority'] == "Low":
             color = Fore.GREEN
         print(color+f"{index}: [{status}] {task['title']} - {task['priority']}")
-        if (isOverDue(task['due_date']) == True):
+        if (isOverDue(task['due_date']) == True and task['done'] == False):
             print("Due Date: " + task['due_date'] + Fore.RED + " - OVERDUE")
         else:
             print("Due Date: " + task['due_date'])
@@ -132,8 +132,10 @@ def markTask(tasks) :
             num = int(input("\nEnter a task to mark as done\n"))
             if (1 <= num <= len(tasks)):
                 tasks[num-1]["done"] = True
+                """
                 if tasks[num-1]["Overdue"]:
                     tasks[num-1]["Overdue"] = False
+                """
                 save(tasks)
                 print("\n Task marked done\n")
             else:
